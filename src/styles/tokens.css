@@ -1,0 +1,49 @@
+:root {
+  /* the haze palette (shared with the owner's Haze dashboard) */
+  --bone: #f1f2f4;
+  --mist: #d3d9e0;
+  --ice: #bcd2e8;
+  --steel: #7e8892;
+  --ink: #0e1114;
+  --leak: #eec6e8;      /* light leak, the single warm accent */
+  --glow: #f7fbff;
+  --signal: #7fa9d4;    /* the one live colour: latent, due, now */
+  --signal-deep: #3f6f9f;
+
+  /* film base: the one dark material in the world (the contact sheet, the canister) */
+  --base: #17191c;
+  --base-2: #23262a;
+  --amber: #d9a46b;     /* edge print on film rebate, like "KODAK 400" */
+
+  --ink-1: rgb(14 17 20 / 0.92);
+  --ink-2: rgb(14 17 20 / 0.74);
+  --ink-3: rgb(14 17 20 / 0.64);
+  --hair: rgb(14 17 20 / 0.14);
+
+  --lift: 0 0 18px rgb(255 255 255 / 0.85), 0 0 2px rgb(255 255 255 / 0.9);
+
+  --pad: 18px;
+  --r-inner: 12px;
+  --r-outer: calc(var(--r-inner) + var(--pad));
+
+  --t-xs: 0.8rem;
+  --t-s: 0.9rem;
+  --t-m: 1rem;
+  --t-l: 1.3rem;
+  --t-xl: 2rem;
+  --t-hero: clamp(3rem, 12vw, 8rem);
+
+  --gutter: clamp(16px, 4vw, 72px);
+  --measure: 62ch;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --display: "Unbounded", system-ui, sans-serif;
+  --read: "Manrope", system-ui, sans-serif;
+
+  --mx: 30%;
+  --my: 20%;
+
+  /* textures, generated as svg turbulence so nothing is downloaded */
+  --tex-grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.2 -.1'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  --tex-paper: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='360'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.012 .45' numOctaves='3' seed='4'/><feColorMatrix values='0 0 0 0 .55 0 0 0 0 .56 0 0 0 0 .58 0 0 0 .7 0'/></filter><rect width='360' height='360' filter='url(%23p)'/></svg>");
+  --tex-cloud: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='.006' numOctaves='4' seed='9'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.4 -.45'/></filter><rect width='420' height='420' filter='url(%23c)'/></svg>");
+}

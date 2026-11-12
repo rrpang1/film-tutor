@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "film-tutor-dev", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 3344 },
+    { "name": "film-tutor-static", "runtimeExecutable": "npx", "runtimeArgs": ["--yes", "serve", "out", "-l", "3345"], "port": 3345 }
+  ]
+}

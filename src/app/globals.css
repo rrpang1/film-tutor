@@ -1,0 +1,83 @@
+@import "../styles/tokens.css";
+@import "../styles/materials.css";
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html, body { margin: 0; }
+body {
+  background: var(--mist);
+  color: var(--ink-1);
+  font-family: var(--read);
+  font-size: var(--t-m);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: 0; padding: 0; }
+a { color: inherit; }
+:focus-visible { outline: 1.5px solid var(--ink-2); outline-offset: 4px; border-radius: 8px; }
+::selection { background: var(--leak); color: var(--ink); }
+.display { font-family: var(--display); font-weight: 250; letter-spacing: -0.02em; line-height: 1.02; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* the world */
+.worldtex {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: var(--tex-paper); background-size: 360px 360px;
+  mix-blend-mode: multiply; opacity: 0.22;
+}
+.grain {
+  position: fixed; inset: -50%; pointer-events: none; z-index: 50;
+  background-image: var(--tex-grain); background-size: 200px 200px;
+  opacity: 0.17; mix-blend-mode: overlay;
+  animation: grain 0.7s steps(5) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); } 20% { transform: translate(-3%, 2%); } 40% { transform: translate(2%, -4%); }
+  60% { transform: translate(-4%, -1%); } 80% { transform: translate(3%, 3%); } 100% { transform: translate(0, 0); }
+}
+
+/* page frame */
+.page { padding: calc(env(safe-area-inset-top) + 20px) var(--gutter) calc(env(safe-area-inset-bottom) + 120px); max-width: 1280px; margin: 0 auto; }
+.pagehead { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: clamp(24px, 6vw, 56px); }
+.pagehead h1 { font-size: clamp(2.2rem, 8vw, 4.6rem); margin: 0; }
+.pagehead p { margin: 8px 0 0; color: var(--ink-2); max-width: 46ch; }
+
+/* shared pieces */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 20px; border-radius: 999px;
+  font-weight: 500; font-size: var(--t-s);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), background 0.4s var(--ease);
+  text-decoration: none;
+}
+.btn.ink { background: var(--ink); color: var(--bone); box-shadow: 0 10px 30px -12px rgb(14 17 20 / 0.6); }
+.btn.ink:hover { transform: translateY(-2px); box-shadow: 0 16px 36px -12px rgb(14 17 20 / 0.6), 0 0 0 4px rgb(127 169 212 / 0.25); }
+.btn.signal { background: var(--signal); color: var(--ink); box-shadow: 0 0 30px -4px rgb(127 169 212 / 0.8); }
+.btn.signal:hover { transform: translateY(-2px); box-shadow: 0 0 44px 0 rgb(127 169 212 / 0.9); }
+.btn.ghost { background: rgb(255 255 255 / 0.4); box-shadow: inset 0 0 0 1px var(--hair); }
+.btn.ghost:hover { background: rgb(255 255 255 / 0.7); }
+.btn:disabled { opacity: 0.45; pointer-events: none; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 999px;
+  font-size: var(--t-xs); background: rgb(255 255 255 / 0.5); box-shadow: inset 0 0 0 1px var(--hair); color: var(--ink-2);
+}
+.chip.live { background: rgb(127 169 212 / 0.22); box-shadow: inset 0 0 0 1px rgb(127 169 212 / 0.6); color: var(--ink-1); }
+.muted { color: var(--ink-3); }
+.field-label { display: block; font-size: var(--t-xs); color: var(--ink-2); margin-bottom: 6px; }
+.input {
+  width: 100%; min-height: 44px; padding: 10px 14px; border-radius: 12px; border: 0;
+  background: rgb(255 255 255 / 0.62); box-shadow: inset 0 0 0 1px var(--hair), inset 0 2px 6px rgb(14 17 20 / 0.05);
+  transition: box-shadow 0.3s var(--ease), background 0.3s var(--ease);
+}
+.input:focus { outline: none; background: rgb(255 255 255 / 0.85); box-shadow: inset 0 0 0 1.5px var(--signal), 0 0 0 4px rgb(127 169 212 / 0.2); }
+textarea.input { min-height: 110px; resize: vertical; line-height: 1.5; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .grain { animation: none; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
