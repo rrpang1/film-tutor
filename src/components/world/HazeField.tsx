@@ -77,11 +77,10 @@ export default function HazeField() {
     const U = (k: string) => gl.getUniformLocation(pr, k);
     const uR = U("r"), uT = U("t"), uM = U("m"), uS = U("sc");
 
-    const mouse = [0.5, 0.5], eased = [0.5, 0.5];
+    // the light is fixed: it no longer follows the cursor
+    const eased = [0.5, 0.62];
     let scroll = 0, easedScroll = 0;
-    const onMove = (e: PointerEvent) => { mouse[0] = e.clientX / innerWidth; mouse[1] = 1 - e.clientY / innerHeight; };
     const onScroll = () => { scroll = scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight); };
-    addEventListener("pointermove", onMove, { passive: true });
     addEventListener("scroll", onScroll, { passive: true });
     const k = Math.min(0.75, 1 / (devicePixelRatio || 1));
     const size = () => { cv.width = Math.round(innerWidth * k); cv.height = Math.round(innerHeight * k); gl.viewport(0, 0, cv.width, cv.height); };
@@ -91,7 +90,6 @@ export default function HazeField() {
     const t0 = performance.now() - (Date.now() % 600000);
     let raf = 0, last = 0;
     const frame = (now: number) => {
-      eased[0] += (mouse[0] - eased[0]) * 0.04; eased[1] += (mouse[1] - eased[1]) * 0.04;
       easedScroll += (scroll - easedScroll) * 0.06;
       gl.uniform2f(uR, cv.width, cv.height);
       gl.uniform1f(uT, still ? 40 : (now - t0) / 1000);
@@ -101,7 +99,7 @@ export default function HazeField() {
     };
     const loop = (now: number) => { raf = requestAnimationFrame(loop); if (document.hidden || now - last < 33) return; last = now; frame(now); };
     if (still) frame(0); else raf = requestAnimationFrame(loop);
-    return () => { cancelAnimationFrame(raf); removeEventListener("resize", size); removeEventListener("pointermove", onMove); removeEventListener("scroll", onScroll); };
+    return () => { cancelAnimationFrame(raf); removeEventListener("resize", size); removeEventListener("scroll", onScroll); };
   }, []);
   return <canvas ref={ref} aria-hidden style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: -2 }} />;
 }

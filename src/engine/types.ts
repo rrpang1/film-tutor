@@ -130,6 +130,36 @@ export type CritiqueRec = {
   deleted?: boolean;
 };
 
+/** One of the owner's own photographs on the prints wall. The image bytes live on the device
+ * (IndexedDB) and, when sync is on, in a photo shard gist named by `shard`. */
+export type PhotoRec = {
+  id: string;
+  title: string;
+  /** date taken (YYYY-MM-DD) */
+  date: string;
+  stock: string;
+  camera: string;
+  /** field-log id of the roll it came from */
+  roll?: string;
+  tags: string[];
+  place?: string;
+  notes?: string;
+  rating: number;
+  fav: boolean;
+  /** detected from the pixels */
+  mono: boolean;
+  hue: number | null;
+  sat: number;
+  w: number;
+  h: number;
+  /** a photo hosted elsewhere instead of stored here */
+  url?: string;
+  shard?: string;
+  addedAt: number;
+  updatedAt: number;
+  deleted?: boolean;
+};
+
 export type Progress = {
   schemaVersion: number;
   nodes: Record<string, NodeRec>;
@@ -138,6 +168,7 @@ export type Progress = {
   logs: Record<string, LogRec>;
   library: Record<string, LibRec>;
   critiques: Record<string, CritiqueRec>;
+  photos: Record<string, PhotoRec>;
   days: string[];
   updatedAt: number;
 };

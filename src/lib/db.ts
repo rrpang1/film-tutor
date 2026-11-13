@@ -26,4 +26,5 @@ export const kv = {
   get: <T>(k: string) => tx<T | undefined>("readonly", (s) => s.get(k) as IDBRequest<T | undefined>),
   set: (k: string, v: unknown) => tx("readwrite", (s) => s.put(v, k)),
   del: (k: string) => tx("readwrite", (s) => s.delete(k)),
+  keys: () => tx<IDBValidKey[]>("readonly", (s) => s.getAllKeys()).then((ks) => ks.map(String)),
 };

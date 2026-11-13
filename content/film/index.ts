@@ -8,6 +8,8 @@ import { darkroom } from "./darkroom";
 import { styles } from "./styles";
 import { history } from "./history";
 import { critique } from "./critique";
+import { editing } from "./editing";
+import { colour } from "./colour";
 import { library } from "./library";
 import { critiques } from "./critiques";
 import { glossary } from "./glossary";
@@ -27,8 +29,10 @@ export const film: SubjectPack = {
     { id: "styles", title: "genres & style", blurb: "street, portrait, landscape, documentary" },
     { id: "history", title: "history & canon", blurb: "from niépce to provoke" },
     { id: "critique", title: "speaking photography", blurb: "describe, analyze, interpret, judge" },
+    { id: "editing", title: "the digital darkroom", blurb: "scans, lightroom classic, b&w, export" },
+    { id: "colour", title: "colour", blurb: "theory, white balance, hsl, grading" },
   ],
-  nodes: [...basics, ...light, ...technique, ...composition, ...gear, ...darkroom, ...styles, ...history, ...critique],
+  nodes: [...basics, ...light, ...technique, ...composition, ...gear, ...darkroom, ...styles, ...history, ...critique, ...editing, ...colour],
   ranks: [
     { level: 1, title: "latent image", line: "something is there. nothing is developed yet." },
     { level: 2, title: "first roll", line: "the first frames are in the can." },

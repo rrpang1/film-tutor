@@ -173,4 +173,10 @@ export const library: LibraryEntry[] = [
   bk({ id: "criticizing-photographs", name: "Criticizing Photographs", by: "Terry Barrett", years: "1990", tags: ["theory", "criticism"], unlockedBy: "interpret",
     summary: "A clear textbook on describing, interpreting and evaluating photographs, and on what photo critics actually do.",
     lookFor: ["the categories of photographs (descriptive, explanatory, interpretive, evaluative, theoretical…)"], prompts: ["Sort ten photographs into Barrett's categories."] }),
+  bk({ id: "interaction-of-color", name: "Interaction of Color", by: "Josef Albers", years: "1963", tags: ["colour", "bauhaus", "teaching"], unlockedBy: "colour-harmony",
+    summary: "Albers' course in colour, taught by experiment rather than theory: the same colour looks different on different grounds, and two different colours can be made to look the same.",
+    lookFor: ["the exercises where one colour is made to look like two", "how much depends on the amount of each colour"], prompts: ["Find a grey in one of your scans and change how it reads only by changing what surrounds it."] }),
+  bk({ id: "art-of-color", name: "The Art of Color", by: "Johannes Itten", years: "1961", tags: ["colour", "bauhaus", "theory"], unlockedBy: "colour-harmony",
+    summary: "The Bauhaus teacher's systematic account of colour, including his twelve-part colour circle and the seven kinds of colour contrast.",
+    lookFor: ["the seven contrasts", "the colour circle"], prompts: ["Find one photograph in the library for each of Itten's seven contrasts."] }),
 ];

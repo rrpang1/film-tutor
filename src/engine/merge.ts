@@ -25,6 +25,7 @@ export function merge(aRaw: unknown, bRaw: unknown): Progress {
     logs: lww(a.logs, b.logs),
     library: lww(a.library, b.library),
     critiques: lww(a.critiques, b.critiques),
+    photos: lww(a.photos, b.photos),
     days: [...new Set([...a.days, ...b.days])].sort(),
     updatedAt: Math.max(a.updatedAt, b.updatedAt),
   };

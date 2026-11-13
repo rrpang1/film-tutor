@@ -3,7 +3,6 @@ import { useEffect, useRef } from "react";
 
 /**
  * The interaction layer, drawn on one canvas above the page:
- * - a soft halo that trails the cursor
  * - a ring of light where you click
  * - sparks that lift off whatever you type into
  * - [data-magnet] elements lean toward the cursor
@@ -20,11 +19,10 @@ export default function Touch() {
     size(); addEventListener("resize", size);
 
     const ps: P[] = [];
-    const cur = { x: innerWidth / 2, y: innerHeight / 2 }, halo = { x: cur.x, y: cur.y };
-    let shown = false;
+    const cur = { x: innerWidth / 2, y: innerHeight / 2 };
 
     const onMove = (e: PointerEvent) => {
-      cur.x = e.clientX; cur.y = e.clientY; shown = e.pointerType === "mouse";
+      cur.x = e.clientX; cur.y = e.clientY;
       for (const el of document.querySelectorAll<HTMLElement>("[data-magnet]")) {
         const b = el.getBoundingClientRect();
         const cx = b.left + b.width / 2, cy = b.top + b.height / 2;
@@ -56,12 +54,6 @@ export default function Touch() {
       raf = requestAnimationFrame(draw);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, innerWidth, innerHeight);
-      halo.x += (cur.x - halo.x) * 0.14; halo.y += (cur.y - halo.y) * 0.14;
-      if (shown) {
-        const g = ctx.createRadialGradient(halo.x, halo.y, 0, halo.x, halo.y, 90);
-        g.addColorStop(0, "rgba(232,240,248,0.24)"); g.addColorStop(0.4, "rgba(200,216,232,0.08)"); g.addColorStop(1, "rgba(255,255,255,0)");
-        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(halo.x, halo.y, 90, 0, Math.PI * 2); ctx.fill();
-      }
       for (let i = ps.length - 1; i >= 0; i--) {
         const p = ps[i]; p.life++;
         const k = p.life / p.max;

@@ -1,16 +1,26 @@
 {
+  "id": "./",
   "name": "film tutor",
   "short_name": "film tutor",
   "description": "learn film photography, frame by frame",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "orientation": "any",
   "background_color": "#d3d9e0",
   "theme_color": "#d3d9e0",
+  "categories": ["education", "photo"],
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
     { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "shortcuts": [
+    { "name": "today's shoots", "url": "./shoots/", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "log a roll", "url": "./log/?new=1", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "prints", "url": "./prints/", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] },
+    { "name": "darkroom review", "url": "./darkroom/", "icons": [{ "src": "icon-192.png", "sizes": "192x192" }] }
   ]
 }

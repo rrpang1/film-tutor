@@ -210,7 +210,8 @@
 .bench-line { margin-top: 56px; text-align: center; color: var(--ink-2); }
 
 /* ─── contact sheet ─── */
-.strips { display: grid; gap: clamp(34px, 6vw, 64px); }
+.strips { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(34px, 6vw, 64px); }
+.strip-wrap { min-width: 0; }
 .strip-label { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
 .strip-label h2 { font-size: var(--t-l); margin: 0; }
 .strip { border-radius: 3px; }

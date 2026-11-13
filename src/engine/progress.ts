@@ -1,10 +1,10 @@
 import type { Card, Progress, SubjectPack, XpEvent } from "./types";
 import { isDue, newCard, review, type Grade, interleave } from "./srs";
 
-export const SCHEMA = 1;
+export const SCHEMA = 2;
 
 export function emptyProgress(now = Date.now()): Progress {
-  return { schemaVersion: SCHEMA, nodes: {}, cards: {}, xp: [], logs: {}, library: {}, critiques: {}, days: [], updatedAt: now };
+  return { schemaVersion: SCHEMA, nodes: {}, cards: {}, xp: [], logs: {}, library: {}, critiques: {}, photos: {}, days: [], updatedAt: now };
 }
 
 /** Bring any older saved shape up to the current schema. */
@@ -12,12 +12,12 @@ export function migrate(raw: unknown): Progress {
   const base = emptyProgress(0);
   if (!raw || typeof raw !== "object") return base;
   const r = raw as Partial<Progress>;
-  // v0 → v1 would go here; v1 is the first schema.
+  // v1 → v2: added photos (the prints wall).
   return {
     ...base,
     ...r,
     nodes: r.nodes ?? {}, cards: r.cards ?? {}, xp: r.xp ?? [], logs: r.logs ?? {},
-    library: r.library ?? {}, critiques: r.critiques ?? {}, days: r.days ?? [],
+    library: r.library ?? {}, critiques: r.critiques ?? {}, photos: r.photos ?? {}, days: r.days ?? [],
     schemaVersion: SCHEMA,
   };
 }

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import Shell from "@/components/Shell";
 import "./globals.css";
 import "./ui.css";
+import "./pass2.css";
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
 

@@ -5,6 +5,9 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Float from "@/components/Float";
 import Canister from "@/components/Canister";
+import ShootSuggestions from "@/components/ShootSuggestions";
+import { usePhotoSrc } from "@/lib/photos";
+import type { PhotoRec } from "@/engine/types";
 import { useStore } from "@/lib/store";
 import { defaultPack as pack } from "@/lib/packs";
 import { plan } from "@/engine/planner";
@@ -22,6 +25,7 @@ export default function Field() {
   const [chosen, setChosen] = useState<string[] | null>(null);
   const picks = chosen ?? pl.suggested.map((n) => n.id);
   const [reviews, setReviews] = useState(true);
+  const prints = Object.values(p.photos).filter((x) => !x.deleted).sort((a, b) => b.addedAt - a.addedAt);
   const logs = Object.values(p.logs).filter((l) => !l.deleted).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 3);
   const unlockedLib = pack.library.filter((e) => !e.unlockedBy || p.nodes[e.unlockedBy]?.learnedAt);
   const pin = unlockedLib.length ? unlockedLib[Math.floor(now / 86_400_000) % unlockedLib.length] : null;
@@ -92,6 +96,10 @@ export default function Field() {
         </div>
       </Float>
 
+      <Float speed={0.05} tilt={0.3} className="glass shoots-card">
+        <ShootSuggestions />
+      </Float>
+
       <div className="field-grid">
         <Float speed={0.12} tilt={1.2} className="tray-card">
           <Link href="/darkroom/" className="tray filmbase" data-magnet>
@@ -140,9 +148,21 @@ export default function Field() {
         </Float>
       </div>
 
+      <Float speed={0.04} tilt={-0.5} className="brushed prints-card">
+        <div className="card-head"><h2 className="display">prints</h2><Link className="btn ghost" href="/prints/">{prints.length ? "the wall" : "add photos"}</Link></div>
+        {prints.length ? (
+          <div className="prints-peek">{prints.slice(0, 8).map((x) => <Peek key={x.id} rec={x} />)}</div>
+        ) : <p className="muted">your own frames, filterable by stock, roll, colour and rating. Add scans from any device.</p>}
+      </Float>
+
       <Float speed={0.02} className="bench-line">
         <p className="lift">{benchDays(p, now)} {benchDays(p, now) === 1 ? "day" : "days"} at the bench in a row. Missing a day only resets the count.</p>
       </Float>
     </div>
   );
+}
+
+function Peek({ rec }: { rec: PhotoRec }) {
+  const src = usePhotoSrc(rec, "thumb");
+  return <Link href="/prints/" className="print-tile" style={{ aspectRatio: `${rec.w} / ${rec.h}` }} aria-label={rec.title || "a print"}>{src && <img src={src} alt="" loading="lazy" />}</Link>;
 }

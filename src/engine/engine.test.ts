@@ -102,3 +102,16 @@ describe("bench days", () => {
     expect(benchDays({ ...p, days: ["2026-11-01"] }, now)).toBe(0);
   });
 });
+
+describe("schema v2 photos", () => {
+  it("migrates v1 progress and merges photos last-write-wins", async () => {
+    const { migrate } = await import("./progress");
+    const { merge } = await import("./merge");
+    const v1 = { schemaVersion: 1, nodes: {}, cards: {}, xp: [], logs: {}, library: {}, critiques: {}, days: [], updatedAt: 1 };
+    expect(migrate(v1).photos).toEqual({});
+    const ph = (t: string, at: number) => ({ id: "a", title: t, date: "2026-11-12", stock: "", camera: "", tags: [], rating: 0, fav: false, mono: false, hue: null, sat: 0, w: 1, h: 1, addedAt: 1, updatedAt: at });
+    const a = { ...migrate(v1), photos: { a: ph("old", 1) } }, b = { ...migrate(v1), photos: { a: ph("new", 2) } };
+    expect(merge(a, b).photos.a.title).toBe("new");
+    expect(merge(b, a).photos.a.title).toBe("new");
+  });
+});

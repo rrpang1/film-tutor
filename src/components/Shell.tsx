@@ -3,7 +3,6 @@ import { useEffect, type ReactNode } from "react";
 import { StoreProvider } from "@/lib/store";
 import HazeField from "./world/HazeField";
 import Touch from "./world/Touch";
-import LightSource from "./world/LightSource";
 import Dock from "./Dock";
 import Ceremonies from "./Ceremonies";
 
@@ -17,7 +16,6 @@ export default function Shell({ children }: { children: ReactNode }) {
     <StoreProvider>
       <HazeField />
       <div className="worldtex" aria-hidden />
-      <LightSource />
       <main>{children}</main>
       <Dock />
       <Ceremonies />

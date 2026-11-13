@@ -12,6 +12,7 @@ const items = [
   { href: "/sheet/", label: "sheet", icon: "M3 6h18v12H3zM3 9h18M3 15h18M7 6v12M12 6v12M17 6v12" },
   { href: "/darkroom/", label: "darkroom", icon: "M4 15h16l-2 4H6zM8 15V9a4 4 0 018 0v6" },
   { href: "/log/", label: "log", icon: "M6 3h9l3 3v15H6zM9 9h6M9 13h6M9 17h3" },
+  { href: "/prints/", label: "prints", icon: "M4 5h16v14H4zM4 15l5-5 4 4 3-3 4 4M15.5 8.5h.01" },
   { href: "/library/", label: "library", icon: "M5 4v16M9 4v16M13 5l4 15M19 4v16" },
   { href: "/loupe/", label: "loupe", icon: "M10 4a6 6 0 110 12 6 6 0 010-12zM14.5 14.5L20 20" },
 ];

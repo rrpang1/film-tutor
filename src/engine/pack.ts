@@ -69,4 +69,4 @@ export function validatePack(pack: SubjectPack): void {
 }
 
 /** Interactive widgets lessons may embed. The UI maps these names to components. */
-export const KNOWN_WIDGETS = new Set(["exposure-sim", "sunny16", "stops-ladder", "zone-scale", "dof", "rule-of-thirds"]);
+export const KNOWN_WIDGETS = new Set(["exposure-sim", "sunny16", "stops-ladder", "zone-scale", "dof", "rule-of-thirds", "develop"]);
